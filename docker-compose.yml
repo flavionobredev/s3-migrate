@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  s3-migration:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: sh -c "npm install && npm run start"
+    volumes:
+      - ./:/usr/s3-migration/app
+    environment:
+      SOURCE_AWS_ACCESS_KEY_ID: ${SOURCE_AWS_ACCESS_KEY_ID}
+      SOURCE_AWS_SECRET_ACCESS_KEY: ${SOURCE_AWS_SECRET_ACCESS_KEY}
+      SOURCE_AWS_REGION: ${SOURCE_AWS_REGION}
+      SOURCE_AWS_BUCKET: ${SOURCE_AWS_BUCKET}
+      SOURCE_AWS_BUCKET_FOLDER: ${SOURCE_AWS_BUCKET_FOLDER}
+      TARGET_AWS_ACCESS_KEY_ID: ${TARGET_AWS_ACCESS_KEY_ID}
+      TARGET_AWS_SECRET_ACCESS_KEY: ${TARGET_AWS_SECRET_ACCESS_KEY}
+      TARGET_AWS_REGION: ${TARGET_AWS_REGION}
+      TARGET_AWS_BUCKET: ${TARGET_AWS_BUCKET}
+      TARGET_AWS_BUCKET_FOLDER: ${TARGET_AWS_BUCKET_FOLDER}
+      SOURCE_FILES_DB_URI: ${SOURCE_FILES_DB_URI}

@@ -1,0 +1,15 @@
+datasource db {
+  provider = "mysql"
+  url      = env("SOURCE_FILES_DB_URI")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output = "./client"
+}
+
+model File {
+  name          String         @unique
+
+  @@map("files")
+}

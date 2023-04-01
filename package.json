@@ -1,0 +1,27 @@
+{
+  "name": "s3-migration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "migrate:medias": "prisma migrate dev --schema ./infra/prisma/s3-migration/migration.prisma",
+    "generate:files": "prisma generate --schema ./infra/prisma/source-db-files/source-db-files.prisma",
+    "start:dev": "npm run migrate:medias && npm run generate:files && node --watch ./src/index.js",
+    "prestart": "sh ./infra/migration-backup.sh download",
+    "start": "npm run migrate:medias && npm run generate:files && node ./src/index.js",
+    "poststart": "sh ./infra/migration-backup.sh upload"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "keywords": [],
+  "author": "Flávio Nobre <flavionobredev@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "prisma": "^4.12.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.303.0",
+    "@prisma/client": "^4.12.0"
+  }
+}
