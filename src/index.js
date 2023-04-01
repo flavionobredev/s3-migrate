@@ -17,7 +17,11 @@ async function bootstrap() {
     targetService,
   });
 
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
   for (const media of result) {
+    await sleep(50);
+    console.log("migrating: ", media.name)
     await migrateMedias.migrate({
       source: {
         name: media.name,
